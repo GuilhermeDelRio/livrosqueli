@@ -3,6 +3,7 @@ import * as bodyParser from 'body-parser';
 
 import DataBase from './infra/database';
 import BookController from './controller/bookController';
+import Auth from './infra/auth';
 
 class StartUp {
   public app: express.Application;
@@ -28,6 +29,9 @@ class StartUp {
 		this.app.route('/').get((req, res) => {
 			res.send({ versao: '0.0.1' })
 		});
+
+    // Auth
+    //this.app.use(Auth.validate);
 
     // Book
     this.app.route('/api/v1/book/').post(BookController.create);

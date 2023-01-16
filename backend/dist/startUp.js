@@ -4,6 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const database_1 = require("./infra/database");
 const bookController_1 = require("./controller/bookController");
+const auth_1 = require("./infra/auth");
 class StartUp {
     constructor() {
         this.app = express();
@@ -17,6 +18,7 @@ class StartUp {
         this.app.use(bodyParser.urlencoded({ extended: false }));
     }
     routes() {
+        this.app.use(auth_1.default.validate);
         this.app.route('/').get((req, res) => {
             res.send({ versao: '0.0.1' });
         });
